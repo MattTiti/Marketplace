@@ -12,10 +12,13 @@ struct TabItem {
 }
 
 struct Navigation: View {
-    @State var selectedIndex = 0
+    @Binding var selectedIndex: Int
+    @Binding var action: Int?
+    @Binding var isPresented: Bool
+    @Binding var messageUsername: String
     @State var presented = false
     @EnvironmentObject var model: AppStateModel
-    
+
     let icons = [
         "house",
         "magnifyingglass",
@@ -29,17 +32,17 @@ struct Navigation: View {
             VStack(spacing: 0) {
                 ZStack {
                     
+
                     switch selectedIndex {
                     case 0:
-                        HomeView()
+                        HomeView(selectedIndex: $selectedIndex, action: $action, isPresented: $isPresented, messageUsername: $messageUsername)
                     case 1:
-                        SearchView() { _ in }
+                        ItemListView(action: $action, selectedIndex: $selectedIndex, isPresented: $isPresented, messageUsername: $messageUsername)
                     case 2:
-                        
-                        PostView()
+                        PostView(selectedIndex: $selectedIndex)
                         
                     case 3:
-                        ConversationListView()
+                        ConversationListView(messageUsername: $messageUsername)
                     default:
                         
                         ProfileView()
@@ -93,11 +96,5 @@ struct Navigation: View {
         }
     }
     
-    
-    struct Navigation_Previews: PreviewProvider {
-        static var previews: some View {
-            Navigation()
-                .environmentObject(AppStateModel())
-        }
-    }
 }
+    

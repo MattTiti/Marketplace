@@ -1,35 +1,32 @@
 //
-//  PostButton.swift
+//  EditButton.swift
 //  Message
 //
-//  Created by Matthew Titi on 7/14/22.
+//  Created by Matthew Titi on 12/29/22.
 //
 
 import SwiftUI
 
-struct PostButton: View {
+struct EditButton: View {
     @Binding var title: String
     @Binding var description: String
     @Binding var category: String
     @Binding var condition: String
     @Binding var size: String
+    @Binding var id: String
     @Binding var price: Int
     @Binding var image: UIImage?
-    @Binding var image2: UIImage?
-    @Binding var image3: UIImage?
-    @Binding var image4: UIImage?
-    @Binding var selectedIndex: Int
+    @Binding var isActive: Bool
+    @Binding var showAlert: Bool
 
-    
     @EnvironmentObject var model: AppStateModel
     
     var body: some View {
         Button(action: {
             self.getPostInfo()
-            selectedIndex = 5
-        
+            showAlert = true
         }, label: {
-            Text("Post")
+            Text("Save Changes")
                 .foregroundColor(.white)
                 .frame(width: 120, height: 60)
                 .background(Color.blue)
@@ -48,9 +45,8 @@ struct PostButton: View {
         guard !description.trimmingCharacters(in: .whitespaces).isEmpty else {
             return
         }
-        model.getPostInfo(title: title, description: description, category: category, condition: condition, size: size, price: price, image: image ?? UIImage(), image2: image2 ?? UIImage(), image3: image3 ?? UIImage(), image4: image4 ?? UIImage())
-    
-      
+        model.updateDocument(id: id, title: title, description: description, category: category, condition: condition, size: size, price: price)
+        model.updatePic(id: id, image: image ?? UIImage())
     }
 
 }

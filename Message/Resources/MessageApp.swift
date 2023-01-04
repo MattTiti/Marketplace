@@ -11,10 +11,15 @@ import Firebase
 @main
 struct MessageApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate: AppDelegate
-    
+    @State var selectedIndex: Int = 0
+    @State var action: Int? = 0
+    @State var isPresented: Bool = false
+    @State var messageUsername: String = ""
+
+
     var body: some Scene {
         WindowGroup {
-            Navigation()
+            Navigation(selectedIndex: $selectedIndex, action: $action, isPresented: $isPresented, messageUsername: $messageUsername)
                 .environmentObject(AppStateModel())
         }
     }

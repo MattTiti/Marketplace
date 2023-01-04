@@ -12,7 +12,7 @@ struct SearchView: View {
     @EnvironmentObject var model: AppStateModel
     @State var text: String = ""
     @State var usernames: [String] = []
-    
+
     let completion: ((String) -> Void)
     
     init(completion: @escaping ((String) -> Void)) {
@@ -55,9 +55,7 @@ struct SearchView: View {
 //                }
 //            }
        
-            ScrollView{
-                
-            }
+            
     }
     }
 }

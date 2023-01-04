@@ -10,14 +10,14 @@ import SwiftUI
 struct ConversationListView: View {
         
     @EnvironmentObject var model: AppStateModel
-    @State var otherUsername: String = ""
-    @State var showChat = false
+    @Binding var messageUsername: String
+    @State var showChat = true
     @State var showSearch = false
     
     var body: some View {
         NavigationView {
             ScrollView(.vertical) {
-                ForEach(model.conversations, id: \.self) { name in NavigationLink(destination: ChatView(otherUsername: name), label: {
+                ForEach(model.conversations, id: \.self) { name in NavigationLink(destination: ChatView(otherUsername: name, messageUsername: $messageUsername), label: {
                     HStack{
                         Circle()
                             .frame(width: 65, height: 65)
@@ -32,13 +32,12 @@ struct ConversationListView: View {
                     
                 })
                 }
-                if !otherUsername.isEmpty {
+                if !messageUsername.isEmpty {
                     NavigationLink("",
-                                   destination: ChatView(otherUsername: otherUsername),
-                                   isActive: $showChat)
+                                   destination: ChatView(otherUsername: messageUsername, messageUsername: $messageUsername), isActive: $showChat)
                 }
             }
-            .navigationTitle("Conversations")
+            .navigationTitle("Conversations").navigationBarTitleDisplayMode(.inline)
 //            .toolbar {
 //                ToolbarItem(placement: ToolbarItemPlacement.navigationBarLeading) { Button("Sign Out") {
 //                    self.signOut()
@@ -75,9 +74,9 @@ struct ConversationListView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ConversationListView()
-            .environmentObject(AppStateModel())
-    }
-}
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ConversationListView()
+//            .environmentObject(AppStateModel())
+//    }
+//}

@@ -20,10 +20,12 @@ struct CustomField: ViewModifier {
 
 struct ChatView: View {
     @State var message: String = ""
+    @Binding var messageUsername: String
     @EnvironmentObject var model: AppStateModel
     let otherUsername: String
-    init(otherUsername: String) {
+    init(otherUsername: String, messageUsername: Binding<String>) {
         self.otherUsername = otherUsername
+        self._messageUsername = messageUsername
     }
     
     var body: some View {
@@ -49,12 +51,16 @@ struct ChatView: View {
             model.otherUsername = otherUsername
             model.observeChat()
         }
+        .onDisappear() {
+            messageUsername = ""
+
+        }
     }
 }
 
-struct ChatView_Previews: PreviewProvider {
-    static var previews: some View {
-        ChatView(otherUsername: "Fawad")
-            .preferredColorScheme(.dark)
-    }
-}
+//struct ChatView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ChatView(otherUsername: "Fawad")
+//            .preferredColorScheme(.dark)
+//    }
+//}

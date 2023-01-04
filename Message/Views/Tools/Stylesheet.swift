@@ -11,7 +11,7 @@ extension Image {
     func profileImageStyle() -> some View{
         self.resizable()
             .aspectRatio(contentMode: .fill)
-            .frame(width: 150, height: 150)
+            .frame(width: 140, height: 140)
             .clipShape(Circle())
             .clipped()
             .overlay(){
