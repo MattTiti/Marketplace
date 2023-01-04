@@ -24,7 +24,7 @@ struct ProfileView: View {
 
                 List{
                     ForEach(viewModel.items.filter { $0.username == model.currentUsername }, id: \.self) { item in
-                        NavigationLink(destination: EditItemView(title: item.title, category: item.category, condition: item.condition, description: item.description, size: item.size, price: item.price, picture: item.picture, id: item.id, isActive: $isActive), tag: item.id, selection: $action1) {
+                        NavigationLink(destination: EditItemView(title: item.title, category: item.category, condition: item.condition, description: item.description, size: item.size, price: item.price, picture: item.picture, picture2: item.picture2, picture3: item.picture3, picture4: item.picture4, id: item.id, isActive: $isActive), tag: item.id, selection: $action1) {
                             HStack {
                                 
                                 VStack(alignment: .leading) {

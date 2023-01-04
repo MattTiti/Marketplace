@@ -43,7 +43,7 @@ struct EditItemView: View {
     
     private let numberFormatter: NumberFormatter
     
-    init(title: String, category: String, condition: String, description: String, size: String, price: Int, picture: URL, id: String, isActive: Binding<Bool>) {
+    init(title: String, category: String, condition: String, description: String, size: String, price: Int, picture: URL, picture2: URL, picture3: URL, picture4: URL, id: String, isActive: Binding<Bool>) {
         numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .currency
         numberFormatter.maximumFractionDigits = 0
@@ -54,6 +54,10 @@ struct EditItemView: View {
         self.value = price
         self.size = size
         self.profileImage = Image(uiImage: UIImage(data: try! Data(contentsOf: picture))!).resizable()
+        self.profileImage2 = Image(uiImage: UIImage(data: try! Data(contentsOf: picture2))!).resizable()
+        self.profileImage3 = Image(uiImage: UIImage(data: try! Data(contentsOf: picture3))!).resizable()
+        self.profileImage4 = Image(uiImage: UIImage(data: try! Data(contentsOf: picture4))!).resizable()
+
         self.id = id
         self._isActive = isActive
         // Use this if NavigationBarTitle is with large font
